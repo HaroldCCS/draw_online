@@ -4,7 +4,9 @@ import CanvasDraw from 'react-canvas-draw'
 
 
 
-const ENDPOINT = "http://127.0.0.1:3010";
+const ENDPOINT = "https://uses-app.herokuapp.com";
+//const ENDPOINT = "http://127.0.0.1:3010";
+
 let socket: any;
 
 interface IChat{
