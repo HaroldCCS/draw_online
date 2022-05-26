@@ -63,6 +63,12 @@ export default function ChatComponent() {
     firstCanvas.current.loadSaveData(data, true)
   }
 
+  const handleClean = () => {
+    firstCanvas.current.clear()
+    const data = firstCanvas.current?.getSaveData();
+    socket.emit("draw", { message: data, id: uniqueId });
+  }
+
   const handleClick = () => {
     const data = firstCanvas.current?.getSaveData();
 
@@ -91,6 +97,7 @@ export default function ChatComponent() {
         //onChange={handleClick}
         />
         <button onClick={handleClick}>Guardar</button>
+        <button onClick={handleClean} >Limpiar</button>
       </div>
 
       <div className="container-chat">
