@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import { connect } from "socket.io-client";
 import CanvasDraw from 'react-canvas-draw'
-
+import "./chatWebSocket.scss"
 
 
 const ENDPOINT = "https://uses-app.herokuapp.com";
@@ -9,7 +9,7 @@ const ENDPOINT = "https://uses-app.herokuapp.com";
 
 let socket: any;
 
-interface IChat{
+interface IChat {
   msg: string,
   Iam: boolean
 }
@@ -18,13 +18,11 @@ let chat: IChat[] = []
 export default function ChatComponent() {
   const [texto, setTexto] = useState("");
   const [messages, setMessages] = useState<IChat[]>([]);
-  const [uniqueId, setUniqueId] = useState(Math.round(Math.random()*100000000));
+  const [uniqueId, setUniqueId] = useState(Math.round(Math.random() * 100000000));
 
   const firstCanvas: any = useRef(null)
 
-  //const secondCanvas: any = useRef(null)
 
-  
   useEffect(() => {
 
     socket = connect(`${ENDPOINT}/play`);
@@ -48,7 +46,7 @@ export default function ChatComponent() {
   }, []);
 
   const addMessageChat = (_message: string, _iam: boolean = false) => {
-    chat.push({ msg: _message.toString(), Iam: _iam})
+    chat.push({ msg: _message.toString(), Iam: _iam })
     setMessages([...chat])
   }
 
@@ -57,6 +55,7 @@ export default function ChatComponent() {
     e.preventDefault();
     addMessageChat(texto, true)
     socket.emit("message", { message: texto });
+    setTexto("")
   }
 
   const addCanvasDraw = (data: any) => {
@@ -67,7 +66,7 @@ export default function ChatComponent() {
   const handleClick = () => {
     const data = firstCanvas.current?.getSaveData();
 
-    
+
     if (lastDraw !== data) {
       console.log('son diferentes')
       lastDraw = data;
@@ -76,34 +75,39 @@ export default function ChatComponent() {
       //firstCanvas.current.loadSaveData(data)
     } else {
       console.log('son idugales');
-      
+
     }
   }
 
 
   return (
-    <>
-      <form onSubmit={(e: React.SyntheticEvent) => handleOnSubmit(e)}>
-        <input type="text" name="texto" id="texto" onChange={(event: any) => setTexto(event.target.value)} />
-        <div>
-          <input type="submit" value="Log in" />
-        </div>
-      </form>
-      {
-        messages.map((_e: IChat, index: number) => <p key={index}> {_e.Iam ? 'Yo:' : 'Otro:'} {_e.msg}</p>)
-      }
+    <div className="container-chat-web-socket">
 
-      <CanvasDraw 
-        brushRadius={1}
-        ref={firstCanvas}
-        immediateLoading
+      <div className="container-draw">
+        <CanvasDraw
+          brushRadius={1}
+          ref={firstCanvas}
+          immediateLoading
         //onChange={handleClick}
-      />
-      <button onClick={handleClick}>Guardar</button>
-    </>
+        />
+        <button onClick={handleClick}>Guardar</button>
+      </div>
 
+      <div className="container-chat">
+        <form onSubmit={(e: React.SyntheticEvent) => handleOnSubmit(e)}>
+          <input type="text" value={texto} name="texto" id="texto" onChange={(event: any) => setTexto(event.target.value)} />
+          <div>
+            <button type="submit" value="Log in" >Send</button>
+          </div>
+        </form>
+        <div className="container-messages">
+        {
+          messages.map((_e: IChat, index: number) => <div className={`message-${_e.Iam ? 'yo' : 'otro'} message`} key={index}>{_e.msg}</div>)
+        }
+        </div>
+      </div>
 
-
+    </div>
   );
 }
 
