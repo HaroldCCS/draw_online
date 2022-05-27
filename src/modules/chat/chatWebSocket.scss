@@ -11,7 +11,7 @@
   //grid-template-columns: 60% minmax(300px, 1fr);
   grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
   background: linear-gradient(
-    to bottom right, #FFDEF2, #E6F0FF
+    to bottom right, #ffe8f6, #E6F0FF
   );
 
   .container-chat{
@@ -88,8 +88,8 @@
       }
       .message-otro{
         flex-direction: row;
-        color: rgb(78, 78, 78);
-        background-color: #e6e6e6;
+        color: rgb(128, 128, 128);
+        background-color: #f2f8ff;
         margin-right: auto;
         margin-left: 1rem;
         border-radius: 2px 21px 21px 21px;
