@@ -10,7 +10,9 @@
   display: grid;
   //grid-template-columns: 60% minmax(300px, 1fr);
   grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-
+  background: linear-gradient(
+    to bottom right, #FFDEF2, #E6F0FF
+  );
 
   .container-chat{
     display: flex;
@@ -106,6 +108,14 @@
       display: flex;
       justify-content: space-between;
       width: 100%;
+      button{
+        background: rgb(158, 127, 214);
+        color: rgb(238, 238, 238);
+        width: 100px;
+        height: 20px;
+        border: rgb(214, 214, 214) 1px solid;
+        border-radius: 7px;
+      }
     }
     height: 420px;
   }
