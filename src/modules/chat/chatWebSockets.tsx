@@ -75,14 +75,10 @@ export default function ChatComponent() {
 
 
     if (lastDraw !== data) {
-      console.log('son diferentes')
       lastDraw = data;
-
       socket.emit("draw", { message: data, id: uniqueId });
       //firstCanvas.current.loadSaveData(data)
     } else {
-      console.log('son idugales');
-
     }
   }
 
@@ -95,6 +91,7 @@ export default function ChatComponent() {
           brushRadius={1}
           ref={firstCanvas}
           immediateLoading
+          lazyRadius={0}
         //onChange={handleClick}
         />
         <button onClick={handleClick}>Guardar</button>
