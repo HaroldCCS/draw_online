@@ -96,6 +96,17 @@
   }
 
   .container-draw{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 400px;
+    margin: 0 auto;
+    .container-buttons-draw{
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+    }
     height: 420px;
   }
 }

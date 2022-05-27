@@ -94,8 +94,10 @@ export default function ChatComponent() {
           lazyRadius={0}
         //onChange={handleClick}
         />
-        <button onClick={handleClick}>Guardar</button>
-        <button onClick={handleClean} >Limpiar</button>
+        <div className="container-buttons-draw">
+          <button onClick={handleClick}>Guardar</button>
+          <button onClick={handleClean} >Limpiar</button>
+        </div>
       </div>
 
       <div className="container-chat">
