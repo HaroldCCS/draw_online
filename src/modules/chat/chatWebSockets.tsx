@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import { connect } from "socket.io-client";
-import CanvasDraw from 'react-canvas-draw'
+import CanvasDraw from 'react-canvas-draw';
+import { FiSend } from 'react-icons/fi';
 import "./chatWebSocket.scss"
 
 
@@ -102,9 +103,9 @@ export default function ChatComponent() {
 
       <div className="container-chat">
         <form onSubmit={(e: React.SyntheticEvent) => handleOnSubmit(e)}>
-          <input type="text" value={texto} name="texto" id="texto" onChange={(event: any) => setTexto(event.target.value)} />
+          <input type="text" autoComplete="off" value={texto} name="texto" id="texto" onChange={(event: any) => setTexto(event.target.value)} />
           <div>
-            <button type="submit" value="Log in" >Send</button>
+            <button type="submit" value="Log in" ><FiSend size='1.3rem' color="white" /></button>
           </div>
         </form>
         <div className="container-messages">

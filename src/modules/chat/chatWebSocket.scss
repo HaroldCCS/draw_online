@@ -1,6 +1,8 @@
 *{
   padding: 0px;
   margin: 0px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 1rem;
 }
 .container-chat-web-socket{
   width: 100%;
@@ -22,14 +24,39 @@
     form{
       width: 100%;
       display: flex;
+      justify-content: center;
+      height: 3rem;
+
       input{
         width: calc(100% - 50px);
-        height: 30px;
+        height: 2.5rem;
+        background-color: #f3f3f3;
         border: rgb(214, 214, 214) 1px solid;
+        border-radius: 1.5rem;
+        margin: 0px 0.5rem;
+        -webkit-box-shadow: 10px 10px 31px -18px rgba(97,97,97,1);
+        -moz-box-shadow: 10px 10px 31px -18px rgba(97,97,97,1);
+        box-shadow: 10px 10px 31px -18px rgba(97,97,97,1);
+        padding-left: 1rem;
+        padding-right: 1rem;
+        color: #7a7a7a;
+        outline: none;
       }
+
       button{
-        height: 32px;
+        height: 2.5rem;
+        background-color: #f3f3f3;
+        border: rgb(214, 214, 214) 1px solid;
+        border-radius: 1.5rem;
+        background: rgb(158, 127, 214);
         width: 50px;
+        padding-top: 0.3rem;
+        margin-right: 0.5rem;
+        cursor: pointer;
+        
+      }
+      input:focus{
+        border: rgb(158, 127, 214) 2px solid;
       }
     }
 
@@ -44,14 +71,26 @@
       .message{
         padding: 0.2rem 0.5rem;
         display: flex;
+        margin-bottom: 1rem;
+        max-width: 80%;
+        padding: 1rem;
       }
       .message-yo{
-        background-color: aliceblue;
         flex-direction: row-reverse;
+        background: rgb(158, 127, 214);
+        color: rgb(238, 238, 238);
+        width: auto;
+        margin-left: auto;
+        margin-right: 1rem;
+        border-radius: 21px 21px 2px 21px;
       }
       .message-otro{
-        background-color: rgb(255, 240, 240);
         flex-direction: row;
+        color: rgb(78, 78, 78);
+        background-color: #e6e6e6;
+        margin-right: auto;
+        margin-left: 1rem;
+        border-radius: 2px 21px 21px 21px;
       }
     }
   }
