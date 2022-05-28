@@ -1,10 +1,12 @@
 import React, { useState, FC } from "react";
 import { FiSend } from 'react-icons/fi';
+import "./chat.scss"
 
 
 interface IChat {
   msg: string,
-  Iam: boolean
+  Iam: boolean,
+  name: string
 }
 
 interface IPropsChat {
@@ -31,7 +33,17 @@ const ChatComponent: FC<IPropsChat> = ({sendMsg, messages}) => {
         </form>
         <div className="container-messages">
         {
-          messages.map((_e: IChat, index: number) => <div className={`message-${_e.Iam ? 'yo' : 'otro'} message`} key={index}>{_e.msg}</div>)
+          messages.map((_e: IChat, index: number) => (
+              _e.Iam ? 
+              <div className={`message-yo message`} key={index}>{_e.msg}</div>
+              :
+              <div className={`message-otro message`} key={index}>
+                <div className="message-name">{_e.name}</div>
+                <div className="message-msg">{_e.msg}</div>
+                
+              </div>
+          )
+          )
         }
         </div>
       </div>

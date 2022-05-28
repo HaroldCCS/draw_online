@@ -1,0 +1,22 @@
+.container-draw {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 400px;
+  margin: 0 auto;
+  .container-buttons-draw {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    button {
+      background: rgb(158, 127, 214);
+      color: rgb(238, 238, 238);
+      width: 100px;
+      height: 20px;
+      border: rgb(214, 214, 214) 1px solid;
+      border-radius: 7px;
+    }
+  }
+  height: 420px;
+}

@@ -1,5 +1,6 @@
 import React, {useEffect, useRef, FC, useState } from "react";
 import CanvasDraw from 'react-canvas-draw';
+import "./draw.scss"
 
 
 interface IPropsChat {
@@ -8,7 +9,7 @@ interface IPropsChat {
 }
 
 const DrawComponent: FC<IPropsChat> = ({sendDraw, draw}) => {
-  const [colorDraw, setDrawColor] = useState<string>('#00000')
+  const [colorDraw, setDrawColor] = useState<string>('#191919')
   const firstCanvas: any = useRef(null)
 
   useEffect(()=> {
