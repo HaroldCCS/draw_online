@@ -16,6 +16,15 @@
       height: 20px;
       border: rgb(214, 214, 214) 1px solid;
       border-radius: 7px;
+      &:active{
+        transform: scale(0.9);
+      }
+    }
+    input{
+      width: 120px;
+    }
+    input:active{
+      transform: scale(0.9);
     }
   }
   height: 420px;

@@ -7,6 +7,8 @@
   overflow-x: hidden;
   overflow-y: hidden;
 
+  box-shadow: inset 0px -100px 100px 1px rgba(157, 127, 214, 0.076) ;
+
   form {
     width: 100%;
     display: flex;
@@ -27,6 +29,13 @@
       padding-right: 1rem;
       color: #7a7a7a;
       outline: none;
+
+      &:focus {
+        border: rgb(158, 127, 214) 2px solid;
+      }
+      &:active{
+        box-shadow: 0px 0px 100px 1px rgba(157, 127, 214, 0.159) ;
+      }
     }
 
     button {
@@ -39,9 +48,13 @@
       padding-top: 0.3rem;
       margin-right: 0.5rem;
       cursor: pointer;
-    }
-    input:focus {
-      border: rgb(158, 127, 214) 2px solid;
+      transition-duration: 0.5s;
+      &:hover{
+        background: rgb(135, 97, 208);
+      }
+      &:active{
+        transform: scale(0.9);
+      }
     }
   }
 
@@ -58,6 +71,7 @@
       margin-bottom: 1rem;
       max-width: 80%;
       padding: 1rem;
+      animation: animate-message 1s;
     }
     .message-yo {
       flex-direction: row-reverse;
@@ -67,6 +81,7 @@
       margin-left: auto;
       margin-right: 1rem;
       border-radius: 21px 21px 2px 21px;
+      animation: animate-message-yo 1s;
     }
     .message-otro {
       flex-direction: column;
@@ -76,12 +91,33 @@
       margin-left: 1rem;
       border-radius: 2px 21px 21px 21px;
       padding-top: 0.3rem;
+      animation: animate-message-otro 1s;
 
       .message-name{
         font-size: 0.6rem;
         font-weight: 1000;
         margin-bottom: 0.2rem;
       }
+    }
+  }
+
+  @keyframes animate-message {
+    0%{
+      opacity: 0;
+    }
+  }
+
+  @keyframes animate-message-yo {
+    0%{
+      opacity: 0;
+      translate: 50px 0px;
+    }
+  }
+
+  @keyframes animate-message-otro {
+    0%{
+      opacity: 0;
+      translate: -50px 0px;
     }
   }
 }

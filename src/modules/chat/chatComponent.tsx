@@ -19,7 +19,7 @@ const ChatComponent: FC<IPropsChat> = ({sendMsg, messages}) => {
 
   const handleOnSubmit = (e: React.SyntheticEvent): void => {
     e.preventDefault();
-    sendMsg(texto)
+    if (texto.trim()) sendMsg(texto.trim());
     setTexto("")
   }
 
