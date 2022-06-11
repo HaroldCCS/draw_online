@@ -29,9 +29,17 @@ export default function SocketComponent() {
     socket = connect(`${ENDPOINT}/play`);
     let channel = "ciao";
 
+    const params = new URLSearchParams(window.location.search)
+    const channel_temp = params.get('canal')
+    //* Validando la exitenia de un canal en la url
+    if (channel_temp) {
+      channel = channel_temp;
+    }
+
+    //TODO Validar en backend que no envie el mensaje A TODOS y hacer la comparacion del channel desde back
     socket.on("connect", () => socket.emit("joinChannel", { channel }));
-    socket.on("message", (_data: any) => addMessageChat(_data.message, _data.name));
-    socket.on("draw", (_data: any) => setDraw(_data.message));
+    socket.on("message", (_data: { channel: string, message: string, name: string }) => _data.channel === channel && addMessageChat(_data.message, _data.name));
+    socket.on("draw", (_data: { channel: string, message: string }) => _data.channel === channel && setDraw(_data.message));
 
     getName(setName)
     //return destroyConecction(socket);
@@ -42,7 +50,7 @@ export default function SocketComponent() {
   //@INFO SOCKETS DE CHAT
   const addMessageChat = (_message: string, _name: string = "pedro", _iam: boolean = false) => {
 
-    chat.push({ msg: _message.toString(), name: _name , Iam: _iam })
+    chat.push({ msg: _message.toString(), name: _name, Iam: _iam })
     setMessages([...chat])
   }
 
