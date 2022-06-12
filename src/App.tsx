@@ -16,7 +16,8 @@ let socket: any;
 interface IChat {
   msg: string,
   Iam: boolean,
-  name: string
+  name: string,
+  type: 'msg' | 'connect'
 }
 let chat: IChat[] = []
 
@@ -32,13 +33,13 @@ export default function SocketComponent() {
     const params = new URLSearchParams(window.location.search)
     const channel_temp = params.get('canal')
     //* Validando la exitenia de un canal en la url
-    if (channel_temp) {
+    if (channel_temp !== null) {
       channel = channel_temp;
     }
 
     //TODO Validar en backend que no envie el mensaje A TODOS y hacer la comparacion del channel desde back
     socket.on("connect", () => socket.emit("joinChannel", { channel }));
-    socket.on("message", (_data: { channel: string, message: string, name: string }) => _data.channel === channel && addMessageChat(_data.message, _data.name));
+    socket.on("message", (_data: { channel: string, message: string, name: string, type: 'msg' | 'connect' }) => _data.channel === channel && addMessageChat(_data.message, _data.name, _data.type));
     socket.on("draw", (_data: { channel: string, message: string }) => _data.channel === channel && setDraw(_data.message));
 
     getName(setName)
@@ -47,16 +48,23 @@ export default function SocketComponent() {
 
 
 
-  //@INFO SOCKETS DE CHAT
-  const addMessageChat = (_message: string, _name: string = "pedro", _iam: boolean = false) => {
+  useEffect(() => {
+    setTimeout(() => {
+      if (name) sendMsg(name, 'connect')
+    }, 1000);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [name]);
 
-    chat.push({ msg: _message.toString(), name: _name, Iam: _iam })
+  //@INFO SOCKETS DE CHAT
+  const addMessageChat = (_message: string, _name: string = "pedro", type: 'msg' | 'connect' = 'msg', _iam: boolean = false) => {
+
+    chat.push({ msg: _message.toString(), name: _name, Iam: _iam, type: type })
     setMessages([...chat])
   }
 
-  const sendMsg = (_msg: string): void => {
-    addMessageChat(_msg, name, true)
-    socket.emit("message", { message: _msg, name: name });
+  const sendMsg = (_msg: string, type: 'msg' | 'connect' = 'msg'): void => {
+    addMessageChat(_msg, name, type, true)
+    socket.emit("message", { message: _msg, name: name, type });
   }
 
 

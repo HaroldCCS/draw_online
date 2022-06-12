@@ -6,13 +6,38 @@ import "./chat.scss"
 interface IChat {
   msg: string,
   Iam: boolean,
-  name: string
+  name: string,
+  type: 'msg' | 'connect'
 }
 
 interface IPropsChat {
   sendMsg: (_msg: string) => void
   messages: IChat[]
 }
+
+
+
+const MessageComponent: FC<IChat> = ({msg, Iam, name, type}) => {
+
+  if (type === 'msg' ) {
+    if (Iam) return <div className={`message-yo message`} >{msg}</div>
+      
+    return (
+      <div className={`message-otro message`}>
+        <div className="message-name">{name}</div>
+        <div className="message-msg">{msg}</div>
+      </div>
+    )
+  }
+
+  if (!Iam) {
+    return <div className="new-user-channel"> {name} ha ingresado</div>
+  }
+
+  return null
+}
+
+
 
 const ChatComponent: FC<IPropsChat> = ({sendMsg, messages}) => {
   const [texto, setTexto] = useState<string>("");
@@ -33,17 +58,7 @@ const ChatComponent: FC<IPropsChat> = ({sendMsg, messages}) => {
         </form>
         <div className="container-messages">
         {
-          messages.map((_e: IChat, index: number) => (
-              _e.Iam ? 
-              <div className={`message-yo message`} key={index}>{_e.msg}</div>
-              :
-              <div className={`message-otro message`} key={index}>
-                <div className="message-name">{_e.name}</div>
-                <div className="message-msg">{_e.msg}</div>
-                
-              </div>
-          )
-          )
+          messages.map((_e: IChat, index: number) => <MessageComponent key={index} msg={_e.msg} name={_e.name} type={_e.type} Iam={_e.Iam} />)
         }
         </div>
       </div>

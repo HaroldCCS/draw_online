@@ -65,14 +65,26 @@
     // overflow-x: hidden;
     // overflow-y: hidden;
 
+    .new-user-channel{
+      margin: 0.5rem auto;
+      animation: animate-new-user-channel 1s;
+      width: auto;
+      color: rgb(128, 128, 128);
+      background-color: #f2f8ff;
+      border-radius: 20px;
+      padding: 0.3rem 2rem;
+      font-size: 12px;
+    }
+
     .message {
-      padding: 0.2rem 0.5rem;
       display: flex;
       margin-bottom: 1rem;
       max-width: 80%;
-      padding: 1rem;
+      padding: 0.7rem 1rem;
       animation: animate-message 1s;
+      font-size: 14px;
     }
+    $border-px: 15px;
     .message-yo {
       flex-direction: row-reverse;
       background: rgb(158, 127, 214);
@@ -80,7 +92,7 @@
       width: auto;
       margin-left: auto;
       margin-right: 1rem;
-      border-radius: 21px 21px 2px 21px;
+      border-radius: $border-px $border-px 2px $border-px;
       animation: animate-message-yo 1s;
     }
     .message-otro {
@@ -89,7 +101,7 @@
       background-color: #f2f8ff;
       margin-right: auto;
       margin-left: 1rem;
-      border-radius: 2px 21px 21px 21px;
+      border-radius: 2px $border-px $border-px $border-px;
       padding-top: 0.3rem;
       animation: animate-message-otro 1s;
 
@@ -97,6 +109,9 @@
         font-size: 0.6rem;
         font-weight: 1000;
         margin-bottom: 0.2rem;
+      }
+      .message-msg{
+        font-size: 14px ;
       }
     }
   }
@@ -118,6 +133,12 @@
     0%{
       opacity: 0;
       translate: -50px 0px;
+    }
+  }
+
+  @keyframes animate-new-user-channel {
+    0%{
+      opacity: 0;
     }
   }
 }
