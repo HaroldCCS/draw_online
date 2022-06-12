@@ -31,7 +31,7 @@ const MessageComponent: FC<IChat> = ({msg, Iam, name, type}) => {
   }
 
   if (!Iam) {
-    return <div className="new-user-channel"> {name} ha ingresado</div>
+    return <div className="new-user-channel"> {name} {msg}</div>
   }
 
   return null

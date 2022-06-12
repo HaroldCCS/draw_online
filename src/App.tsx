@@ -8,8 +8,8 @@ import ChatComponent from "./modules/chat/chatComponent";
 import { getName } from "./utils/localStorage";
 
 
-const ENDPOINT = "https://uses-app.herokuapp.com";
-//const ENDPOINT = "http://127.0.0.1:3010";
+//const ENDPOINT = "https://uses-app.herokuapp.com";
+const ENDPOINT = "http://127.0.0.1:3010";
 
 let socket: any;
 
@@ -43,21 +43,19 @@ export default function SocketComponent() {
     socket.on("draw", (_data: { channel: string, message: string }) => _data.channel === channel && setDraw(_data.message));
 
     getName(setName)
-    //return destroyConecction(socket);
   }, []);
 
 
 
   useEffect(() => {
     setTimeout(() => {
-      if (name) sendMsg(name, 'connect')
+      if (name) sendMsg('se ha conectado', 'connect')
     }, 1000);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [name]);
 
   //@INFO SOCKETS DE CHAT
-  const addMessageChat = (_message: string, _name: string = "pedro", type: 'msg' | 'connect' = 'msg', _iam: boolean = false) => {
-
+  const addMessageChat = (_message: string, _name: string, type: 'msg' | 'connect' = 'msg', _iam: boolean = false) => {
     chat.push({ msg: _message.toString(), name: _name, Iam: _iam, type: type })
     setMessages([...chat])
   }
