@@ -1,22 +1,27 @@
-import React, {useEffect, useRef, FC, useState } from "react";
+import React, {useEffect, useRef, FC, useState, useContext } from "react";
 import CanvasDraw from 'react-canvas-draw';
+import { SocketContext } from "../../context/SocketContext";
 import "./draw.scss"
 
 
-interface IPropsChat {
-  sendDraw: (_draw: any) => void
-  draw: any
-}
+interface IPropsChat {}
 
-const DrawComponent: FC<IPropsChat> = ({sendDraw, draw}) => {
+const DrawComponent: FC<IPropsChat> = () => {
   const [colorDraw, setDrawColor] = useState<string>('#191919')
+  const [draw, setDraw] = useState<any>(null)
   const firstCanvas: any = useRef(null)
 
+  const { socket  }: any = useContext( SocketContext );
+
+
+  useEffect(() => {
+    socket.on("draw", (_data: any) => setDraw(_data)) 
+  },[socket])
+
   useEffect(()=> {
-    if (draw) {
-      firstCanvas.current.loadSaveData(draw, true)
-    }
+    if (draw) firstCanvas.current.loadSaveData(draw, true);
   },[draw])
+
 
   const handleClean = () => {
     firstCanvas.current.clear()
@@ -25,7 +30,7 @@ const DrawComponent: FC<IPropsChat> = ({sendDraw, draw}) => {
 
   const handleDraw = () => {
     const data = firstCanvas.current?.getSaveData();
-    sendDraw(data)
+    socket.emit("draw", data );
   }
 
 

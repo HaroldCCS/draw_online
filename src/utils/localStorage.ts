@@ -1,6 +1,4 @@
-
-
-export const getName = (_setState: (_name: string) => void) => {
+export const getStorageName = (_setState: (_name: string) => void) => {
   let existsName = localStorage.getItem('name')
   
   if (!existsName || existsName === null) {
